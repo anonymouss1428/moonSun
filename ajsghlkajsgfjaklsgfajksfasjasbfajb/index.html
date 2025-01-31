@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güneş mi, Ay mı?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Güneş mi, Ay mı?</h1>
+    <p id="question">Sabah insanı mısın, gece kuşu mu?</p>
+    <div id="choices">
+        <button onclick="answer(1)">Sabah insanıyım ☀️</button>
+        <button onclick="answer(2)">Gece kuşuyum 🌙</button>
+    </div>
+    <p id="result" class="hidden"></p>
+    <button id="restart" class="hidden" onclick="restartGame()">Tekrar Oyna 🔄</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

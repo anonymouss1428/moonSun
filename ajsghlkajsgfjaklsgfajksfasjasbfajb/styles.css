@@ -1,0 +1,67 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #ffcc00, #ff6600);
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    max-width: 90%;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border: none;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 80%;
+    max-width: 300px;
+}
+
+button:first-child {
+    background: #ffd700;
+}
+
+button:last-child {
+    background: #4b0082;
+    color: white;
+}
+
+/* iPhone 13 ve benzer ekranlar için */
+@media screen and (max-width: 430px) {
+    body {
+        background: linear-gradient(to bottom, #ffcc00, #ff9900);
+        height: 100vh;
+    }
+
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px;
+        width: 90%;
+    }
+}
