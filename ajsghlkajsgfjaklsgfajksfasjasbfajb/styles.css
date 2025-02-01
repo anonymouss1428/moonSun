@@ -47,17 +47,10 @@ button {
     max-width: 300px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
-}
-
-button:first-child {
     background: #ffd700;
-    color: #2f4f4f;
+        color: #2f4f4f;
 }
 
-button:last-child {
-    background: #4b0082;
-    color: white;
-}
 
 button:hover {
     transform: scale(1.05);
