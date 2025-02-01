@@ -1,55 +1,97 @@
-let sunPoints = 0;
-let moonPoints = 0;
 let currentQuestion = 0;
+let score = 0; // Güneş için pozitif, Ay için negatif puan
 
 const questions = [
-    { text: "Sabah insanı mısın, gece kuşu mu?", sun: "Sabah insanıyım ☀️", moon: "Gece kuşuyum 🌙" },
-    { text: "Hangi hava durumunu seversin?", sun: "Güneşli ve sıcak ☀️", moon: "Serin ve yıldızlı 🌌" },
-    { text: "Enerjini nasıl alırsın?", sun: "Gün ışığından! 😎", moon: "Sessiz ve huzurlu gecelerden. 😌" },
+    {
+        question: "Sabah insanı mısın, gece kuşu mu?",
+        choices: ["Sabah insanıyım ☀️", "Gece kuşuyum 🌙"],
+        values: [1, -1]
+    },
+    {
+        question: "Romantik misin, maceracı mı?",
+        choices: ["Romantiğim ❤️", "Maceracıyım 🏞️"],
+        values: [1, -1]
+    },
+    {
+        question: "Hangi ortamda daha mutlusun?",
+        choices: ["Güneşli, açık alanlarda 🌞", "Yıldızlı bir gece 🏙️"],
+        values: [1, -1]
+    },
+    {
+        question: "Kendi başına zaman geçirmek mi, arkadaşlarınla olmak mı?",
+        choices: ["Tek başıma vakit geçirmeyi severim 🌙", "Arkadaşlarımla olmayı tercih ederim ☀️"],
+        values: [-1, 1]
+    },
+    {
+        question: "Bir tatil seç! 🏝️",
+        choices: ["Tropik bir sahilde dinlenmek 🏖️", "Dağlarda kamp yapmak ⛺"],
+        values: [1, -1]
+    },
+    {
+        question: "Bir film türü seç!",
+        choices: ["Romantik filmler ❤️", "Bilim kurgu ve macera 🚀"],
+        values: [1, -1]
+    },
+    {
+        question: "Hangi güç seni daha çok çeker?",
+        choices: ["Işığı ve sıcaklığı kontrol etmek ☀️", "Geceyi ve gölgeleri şekillendirmek 🌑"],
+        values: [1, -1]
+    },
+    {
+        question: "Hangisini tercih edersin?",
+        choices: ["Enerjik, hareketli etkinlikler 🏃", "Huzurlu ve sakin anlar ☕"],
+        values: [1, -1]
+    }
 ];
 
-function answer(choice) {
-    if (choice === 1) sunPoints++;
-    else moonPoints++;
+function startGame() {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("question-screen").style.display = "block";
+    score = 0; // Skoru sıfırla
+    showQuestion();
+}
 
-    currentQuestion++;
-
+function showQuestion() {
     if (currentQuestion < questions.length) {
-        document.getElementById("question").innerText = questions[currentQuestion].text;
-        document.getElementById("choices").innerHTML = `
-            <button onclick="answer(1)">${questions[currentQuestion].sun}</button>
-            <button onclick="answer(2)">${questions[currentQuestion].moon}</button>
-        `;
+        const questionObj = questions[currentQuestion];
+        document.getElementById("question").textContent = questionObj.question;
+        const choicesDiv = document.getElementById("choices");
+        choicesDiv.innerHTML = "";
+        questionObj.choices.forEach((choice, index) => {
+            const button = document.createElement("button");
+            button.textContent = choice;
+            button.onclick = () => answer(index);
+            choicesDiv.appendChild(button);
+        });
     } else {
         showResult();
     }
 }
 
-function showResult() {
-    let resultText = sunPoints > moonPoints
-        ? "Sen tam bir Güneşsin! ☀️ Enerjinle her yeri aydınlatıyorsun!"
-        : "Sen Ay’ın büyüleyici ışığısın! 🌙 Sakin, huzurlu ve büyüleyicisin!";
+function answer(choiceIndex) {
+    score += questions[currentQuestion].values[choiceIndex]; // Seçime göre skoru güncelle
+    currentQuestion++;
+    showQuestion();
+}
 
-    document.getElementById("question").style.display = "none";
-    document.getElementById("choices").style.display = "none";
-    document.getElementById("result").innerText = resultText;
-    document.getElementById("result").classList.remove("hidden");
-    document.getElementById("restart").classList.remove("hidden");
+function showResult() {
+    document.getElementById("question-screen").style.display = "none";
+    document.getElementById("result-screen").style.display = "block";
+
+    let resultText = "";
+    if (score > 0) {
+        resultText = "Sen bir Güneş gibisin! ☀️ Enerjik, sıcak ve neşelisin!";
+    } else if (score < 0) {
+        resultText = "Sen bir Ay gibisin! 🌙 Gizemli, huzurlu ve derin düşüncelisin!";
+    } else {
+        resultText = "Sen hem Güneş, hem de Aysın! ☀️🌙 Dengeli ve uyumlusun!";
+    }
+
+    document.getElementById("final-result").textContent = resultText;
 }
 
 function restartGame() {
-    sunPoints = 0;
-    moonPoints = 0;
+    document.getElementById("result-screen").style.display = "none";
+    document.getElementById("start-screen").style.display = "block";
     currentQuestion = 0;
-
-    document.getElementById("question").style.display = "block";
-    document.getElementById("choices").style.display = "block";
-    document.getElementById("question").innerText = questions[0].text;
-    document.getElementById("choices").innerHTML = `
-        <button onclick="answer(1)">${questions[0].sun}</button>
-        <button onclick="answer(2)">${questions[0].moon}</button>
-    `;
-
-    document.getElementById("result").classList.add("hidden");
-    document.getElementById("restart").classList.add("hidden");
 }
