@@ -95,3 +95,26 @@ function restartGame() {
     document.getElementById("start-screen").style.display = "block";
     currentQuestion = 0;
 }
+
+// Güneş ve Ay arasındaki mesafeyi kontrol et
+function checkPosition() {
+    const sun = document.querySelector('.sun');
+    const moon = document.querySelector('.moon');
+    const sunRect = sun.getBoundingClientRect();
+    const moonRect = moon.getBoundingClientRect();
+
+    // Güneş ve ayın merkezlerinin mesafesi
+    const dx = moonRect.left - sunRect.left;
+    const dy = moonRect.top - sunRect.top;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // Eğer mesafe 200px'den küçükse (yakınsa), "close" sınıfını ekle
+    if (distance < 100) {
+        document.body.classList.add('sun-close', 'moon-close');
+    } else {
+        document.body.classList.remove('sun-close', 'moon-close');
+    }
+}
+
+// Bu fonksiyonu her 100ms'de bir çalıştır
+setInterval(checkPosition, 100);
