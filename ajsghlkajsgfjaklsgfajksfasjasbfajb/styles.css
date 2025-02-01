@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #ffcc00, #ff6600);
+    background: radial-gradient(circle at top right, #6a1b9a, #ffcc00); /* Başlangıçta mor ve sarı karışımı */
     color: white;
     text-align: center;
     display: flex;
@@ -8,30 +8,50 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
+    position: relative;
+    transition: background 1s ease; /* Arka planın hızlı geçişi */
 }
 
 .container {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 20px;
     width: 350px;
     max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-size: 36px;
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    margin: 20px 0;
 }
 
 button {
     display: block;
-    margin: 10px auto;
+    margin: 15px auto;
     padding: 12px;
     border: none;
-    font-size: 18px;
-    border-radius: 8px;
+    font-size: 20px;
+    border-radius: 12px;
     cursor: pointer;
     width: 80%;
     max-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
 button:first-child {
     background: #ffd700;
+    color: #2f4f4f;
 }
 
 button:last-child {
@@ -39,29 +59,116 @@ button:last-child {
     color: white;
 }
 
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Animasyonlu Güneş ve Ay */
+@keyframes sunMove {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    50% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        top: 90%;
+        left: 90%;
+    }
+}
+
+@keyframes moonMove {
+    0% {
+        top: 80%;
+        left: 80%;
+    }
+    50% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        clip-path: circle(50% at 50% 50%); /* Hilal efekti */
+    }
+    100% {
+        top: 10%;
+        left: 10%;
+        clip-path: circle(20% at 50% 50%); /* Hilalin küçülmesi */
+    }
+}
+
+.sun {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #ffcc00, #ff6600);
+    border-radius: 50%;
+    animation: sunMove 20s ease-in-out infinite;
+    z-index: 1; /* Alt tarafta */
+    box-shadow: 0 0 50px rgba(255, 255, 0, 0.8);
+}
+
+.moon {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #fffff0, #800080);
+    border-radius: 50%;
+    animation: moonMove 20s ease-in-out infinite;
+    z-index: 1; /* Alt tarafta */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Güneş ve Ay çok yaklaştığında arka plan koyulaşacak */
+body.sun-close {
+    background: radial-gradient(circle at top right, #4b0082, #b00000); /* Koyu mor ve kırmızı karışımı */
+}
+
+body.moon-close {
+    background: radial-gradient(circle at top right, #4b0082, #b00000); /* Koyu mor ve kırmızı karışımı */
+}
+
+/* Arka plan başlangıçta açık olacak, güneş ve ay yaklaştıkça koyulaşacak */
+body.sun-close, body.moon-close {
+    transition: background 1s ease; /* Yumuşak geçiş */
+}
+
+/* Başlangıç ekranı görünür, diğerleri gizlenir */
+#start-screen {
+    display: block;
+}
+
+#question-screen, #result-screen {
+    display: none;
+}
+
 /* iPhone 13 ve benzer ekranlar için */
 @media screen and (max-width: 430px) {
     body {
-        background: linear-gradient(to bottom, #ffcc00, #ff9900);
-        height: 100vh;
+        background: radial-gradient(circle at top right, #6a1b9a, #ffcc00); /* Mor ve sarı karışımı */
     }
 
     .container {
         width: 90%;
-        padding: 15px;
+        padding: 25px;
     }
 
     h1 {
-        font-size: 22px;
+        font-size: 28px;
     }
 
     p {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     button {
-        font-size: 16px;
-        padding: 10px;
+        font-size: 18px;
+        padding: 14px;
         width: 90%;
     }
 }
