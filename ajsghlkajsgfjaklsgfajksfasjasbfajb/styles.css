@@ -139,6 +139,22 @@ body.sun-close, body.moon-close {
     display: none;
 }
 
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.8); }
+}
+
 /* iPhone 13 ve benzer ekranlar için */
 @media screen and (max-width: 430px) {
     body {

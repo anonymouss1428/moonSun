@@ -136,5 +136,35 @@ function checkPosition() {
     }
 }
 
+function createStars() {
+    const numStars = 500; // Kaç yıldız olacağını belirle
+    const container = document.body;
+
+    for (let i = 0; i < numStars; i++) {
+        let star = document.createElement("div");
+        star.classList.add("star");
+
+        // Rastgele konum belirle
+        let x = Math.random() * window.innerWidth;
+        let y = Math.random() * window.innerHeight;
+
+        // Farklı boyutlarda yıldızlar
+        let size = Math.random() * 3 + 2; // 2px - 5px arası
+
+        // Farklı hızlarda yanıp sönmeleri için animasyon süresi değişken
+        let duration = Math.random() * 2 + 1; // 1 - 3 saniye arası
+
+        star.style.left = `${x}px`;
+        star.style.top = `${y}px`;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.animationDuration = `${duration}s`;
+
+        container.appendChild(star);
+    }
+}
+
+createStars(); // Yıldızları oluştur
+
 // Bu fonksiyonu her 100ms'de bir çalıştır
 setInterval(checkPosition, 100);
