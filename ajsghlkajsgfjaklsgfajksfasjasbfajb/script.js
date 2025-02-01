@@ -14,8 +14,8 @@ const questions = [
     },
     {
         question: "Hangi ortamda daha mutlusun?",
-        choices: ["Güneşli, açık alanlarda 🌞", "Yıldızlı bir gece 🏙️"],
-        values: [1, -1]
+        choices: ["Yıldızlı bir gece 🏙️","Güneşli, açık alanlarda 🌞"],
+        values: [-1, 1]
     },
     {
         question: "Kendi başına zaman geçirmek mi, arkadaşlarınla olmak mı?",
@@ -29,8 +29,8 @@ const questions = [
     },
     {
         question: "Bir film türü seç!",
-        choices: ["Romantik filmler ❤️", "Bilim kurgu ve macera 🚀"],
-        values: [1, -1]
+        choices: ["Bilim kurgu ve macera 🚀","Romantik filmler ❤️"],
+        values: [-1, 1]
     },
     {
         question: "Hangi güç seni daha çok çeker?",
@@ -69,10 +69,30 @@ function showQuestion() {
 }
 
 function answer(choiceIndex) {
-    score += questions[currentQuestion].values[choiceIndex]; // Seçime göre skoru güncelle
+    const buttons = document.querySelectorAll("#choices button");
+
+    // Seçilen butonu belirle
+    const selectedButton = buttons[choiceIndex];
+
+    // Seçime göre butonun rengini değiştir
+    if (questions[currentQuestion].values[choiceIndex] > 0) {
+        selectedButton.style.backgroundColor = "yellow"; // Güneş
+        selectedButton.style.color = "black";
+    } else {
+        selectedButton.style.backgroundColor = "purple"; // Ay
+        selectedButton.style.color = "white";
+    }
+
+    score += questions[currentQuestion].values[choiceIndex]; // Skoru güncelle
+
     currentQuestion++;
-    showQuestion();
+
+    // Yeni soruya geçmeden önce gecikme ekle
+    setTimeout(() => {
+        showQuestion();
+    }, 1000); // 1 saniye gecikme
 }
+
 
 function showResult() {
     document.getElementById("question-screen").style.display = "none";
