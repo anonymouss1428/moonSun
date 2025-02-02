@@ -60,7 +60,7 @@ function showQuestion() {
         questionObj.choices.forEach((choice, index) => {
             const button = document.createElement("button");
             button.textContent = choice;
-            button.onclick = () => answer(index);
+            button.onclick = () => answer(index, button);
             choicesDiv.appendChild(button);
         });
     } else {
@@ -68,13 +68,10 @@ function showQuestion() {
     }
 }
 
-function answer(choiceIndex) {
+function answer(choiceIndex, selectedButton) {
     const buttons = document.querySelectorAll("#choices button");
 
-    // Seçilen butonu belirle
-    const selectedButton = buttons[choiceIndex];
-
-    // Seçime göre butonun rengini değiştir
+    // Seçilen butona göre rengini değiştir
     if (questions[currentQuestion].values[choiceIndex] > 0) {
         selectedButton.style.backgroundColor = "yellow"; // Güneş
         selectedButton.style.color = "black";
@@ -85,6 +82,21 @@ function answer(choiceIndex) {
 
     score += questions[currentQuestion].values[choiceIndex]; // Skoru güncelle
 
+    // Eğer son sorudaysa, şarkıyı çal
+    if (currentQuestion === questions.length - 1) {
+        let sunAudio = document.getElementById("audio-sun");
+        let moonAudio = document.getElementById("audio-moon");
+        let balanceAudio = document.getElementById("audio-balance");
+
+        if (score > 0) {
+            sunAudio.play();  // Güneş şarkısını çal
+        } else if (score < 0) {
+            moonAudio.play();  // Ay şarkısını çal
+        } else {
+            balanceAudio.play(); // Güneş ve Ay şarkısını çal
+        }
+    }
+
     currentQuestion++;
 
     // Yeni soruya geçmeden önce gecikme ekle
@@ -93,28 +105,53 @@ function answer(choiceIndex) {
     }, 1000); // 1 saniye gecikme
 }
 
-
 function showResult() {
     document.getElementById("question-screen").style.display = "none";
     document.getElementById("result-screen").style.display = "block";
 
     let resultText = "";
+    let sunAudio = document.getElementById("audio-sun");
+    let moonAudio = document.getElementById("audio-moon");
+    let balanceAudio = document.getElementById("audio-balance");
+
+    // Sonuç metnini ayarla ve şarkıyı çal
     if (score > 0) {
         resultText = "Sen bir Güneş gibisin! ☀️ Enerjik, sıcak ve neşelisin!";
+        sunAudio.play();  // Güneş şarkısını çal
     } else if (score < 0) {
         resultText = "Sen bir Ay gibisin! 🌙 Gizemli, huzurlu ve derin düşüncelisin!";
+        moonAudio.play();  // Ay şarkısını çal
     } else {
         resultText = "Sen hem Güneş, hem de Aysın! ☀️🌙 Dengeli ve uyumlusun!";
+        balanceAudio.play(); // Güneş ve Ay şarkısını çal
     }
 
     document.getElementById("final-result").textContent = resultText;
 }
 
 function restartGame() {
+    // Oyun ekranlarını sıfırlama
     document.getElementById("result-screen").style.display = "none";
     document.getElementById("start-screen").style.display = "block";
+
+    // Şarkıları durdurma
+    let sunAudio = document.getElementById("audio-sun");
+    let moonAudio = document.getElementById("audio-moon");
+    let balanceAudio = document.getElementById("audio-balance");
+
+    sunAudio.pause();
+    moonAudio.pause();
+    balanceAudio.pause();
+
+    // Şarkıların başlangıç noktasına geri sıfırlanması
+    sunAudio.currentTime = 0;
+    moonAudio.currentTime = 0;
+    balanceAudio.currentTime = 0;
+
+    // Soruları sıfırlama
     currentQuestion = 0;
 }
+
 
 // Güneş ve Ay arasındaki mesafeyi kontrol et
 function checkPosition() {
