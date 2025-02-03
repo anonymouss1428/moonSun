@@ -24,15 +24,38 @@ body {
     z-index: 2;
 }
 
-h1 {
-    font-size: 36px;
-    color: #ffd700;
-    margin-bottom: 20px;
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: baseline; /* Alt çizgiye hizalama */
+    gap: 10px;
 }
+
+h1, h2 {
+    font-size: 36px;
+    margin: 0; /* Alt boşluğu kaldırır */
+    line-height: 1; /* Satır yüksekliğini eşitler */
+}
+
+h1 {
+    color: #ffd700; /* Altın sarısı */
+}
+
+h2 {
+    color: #800080; /* Mor */
+}
+
 
 p {
     font-size: 18px;
     margin: 20px 0;
+    color: #ffd700;
+}
+
+p2 {
+    font-size: 18px;
+    margin: 20px 0;
+    color: #800080;
 }
 
 button {
@@ -178,5 +201,9 @@ body.sun-close, body.moon-close {
         font-size: 18px;
         padding: 14px;
         width: 90%;
+    }
+
+    .hidden {
+        display: none;
     }
 }
