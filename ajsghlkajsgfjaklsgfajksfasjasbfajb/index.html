@@ -10,17 +10,21 @@
 <div class="container">
     <!-- Başlangıç Ekranı -->
     <div id="start-screen">
-        <h1>Güneş mi, Ay mı?</h1>
-        <p>Sevdiğinizin kişiliğini keşfedin!</p>
+        <div class="title">
+            <h1 class="sun-text">Güneş mi,</h1>
+            <h2 class="moon-text">Ay mı?</h2>
+        </div>
+        <p>Kişiliğini keşfet!</p>
+        <p2>Not: Diğer senaryoları da bi dene derim sevgilim :)</p2>
         <button onclick="startGame()">Oyuna Başla</button>
     </div>
 
     <!-- Soru Ekranı -->
     <div id="question-screen" class="hidden">
-        <p id="question">Sabah insanı mısın, gece kuşu mu?</p>
+        <p id="question"></p>
         <div id="choices">
-            <button onclick="answer(1)">Sabah insanıyım ☀️</button>
-            <button onclick="answer(2)">Gece kuşuyum 🌙</button>
+            <button onclick="answer(1)"></button>
+            <button onclick="answer(2)"></button>
         </div>
     </div>
 

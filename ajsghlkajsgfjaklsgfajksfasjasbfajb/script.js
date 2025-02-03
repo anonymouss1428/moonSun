@@ -3,46 +3,57 @@ let score = 0; // Güneş için pozitif, Ay için negatif puan
 
 const questions = [
     {
-        question: "Sabah insanı mısın, gece kuşu mu?",
-        choices: ["Sabah insanıyım ☀️", "Gece kuşuyum 🌙"],
-        values: [1, -1]
-    },
-    {
-        question: "Romantik misin, maceracı mı?",
-        choices: ["Romantiğim ❤️", "Maceracıyım 🏞️"],
-        values: [1, -1]
-    },
-    {
-        question: "Hangi ortamda daha mutlusun?",
-        choices: ["Yıldızlı bir gece 🏙️","Güneşli, açık alanlarda 🌞"],
+        question: "1. Birlikte bir günü paylaşsak hangisi daha özel olurdu?",
+        choices: ["Sessiz bir sahilde yürümek 🌊", "Göz kamaştıran bir gün doğumunu izlemek 🌄"],
         values: [-1, 1]
     },
     {
-        question: "Kendi başına zaman geçirmek mi, arkadaşlarınla olmak mı?",
-        choices: ["Tek başıma vakit geçirmeyi severim 🌙", "Arkadaşlarımla olmayı tercih ederim ☀️"],
-        values: [-1, 1]
-    },
-    {
-        question: "Bir tatil seç! 🏝️",
-        choices: ["Tropik bir sahilde dinlenmek 🏖️", "Dağlarda kamp yapmak ⛺"],
+        question: "2. Seni en çok ne heyecanlandırır?",
+        choices: ["Yeni yerler keşfetmek, maceraya atılmak 🚀", "Tanıdık bir sessizlikte huzur bulmak 🕊️"],
         values: [1, -1]
     },
     {
-        question: "Bir film türü seç!",
-        choices: ["Bilim kurgu ve macera 🚀","Romantik filmler ❤️"],
+        question: "3. Birlikte geçireceğimiz ideal akşam nasıl olurdu?",
+        choices: ["Sakin bir kafede derin bir sohbet ☕", "Renkli ışıklar altında dans etmek 🎉"],
         values: [-1, 1]
     },
     {
-        question: "Hangi güç seni daha çok çeker?",
-        choices: ["Işığı ve sıcaklığı kontrol etmek ☀️", "Geceyi ve gölgeleri şekillendirmek 🌑"],
+        question: "4. Aşkta sana ne daha önemli gelir?",
+        choices: ["Tutkulu, yoğun duygularla dolu anlar yaşamak ❤️‍🔥", "Derin, anlamlı bir bağ kurmak 🔗"],
         values: [1, -1]
     },
     {
-        question: "Hangisini tercih edersin?",
-        choices: ["Enerjik, hareketli etkinlikler 🏃", "Huzurlu ve sakin anlar ☕"],
+        question: "5. Bir hediyeyle seni etkilemek istesem neyi seçerdim?",
+        choices: ["El yazısıyla yazılmış küçük bir not vermek ✉️", "Parlak, sürpriz dolu bir hediye paketi açtırmak 🎁"],
+        values: [-1, 1]
+    },
+    {
+        question: "6. Hangisi sana daha yakın?",
+        choices: ["Duygularımı coşkuyla göstermek 🎨", "Sessizliğin içindeki duygularımı hissettirmek 🌫️"],
+        values: [1, -1]
+    },
+    {
+        question: "7. Birlikte bir film seçsek hangisini izleriz?",
+        choices: ["Duygusal bir aşk hikayesiyle gözyaşı döktüren bir film 😢", "Bol kahkahalı bir romantik komedi 😂"],
+        values: [-1, 1]
+    },
+    {
+        question: "8. Bir anıya dönüp bakarken neye odaklanırsın?",
+        choices: ["O anki heyecana ve neşeye 🎈", "O an hissettiğim duyguların derinliğine 📝"],
+        values: [1, -1]
+    },
+    {
+        question: "9. Aşkı hangi cümle tanımlar?",
+        choices: ["“Seninle sessizlik bile anlam kazanır.” 🤍", "“Seninle hayat daha renkli ve canlı.” 🌺"],
+        values: [-1, 1]
+    },
+    {
+        question: "10. Hangi ortam sana daha iyi hissettirir?",
+        choices: ["Doğada özgürce koşmak 🏞️", "Pencere kenarında huzurla kitap okumak 📖"],
         values: [1, -1]
     }
 ];
+
 
 function startGame() {
     document.getElementById("start-screen").style.display = "none";
@@ -115,18 +126,35 @@ function showResult() {
     let balanceAudio = document.getElementById("audio-balance");
 
     // Sonuç metnini ayarla ve şarkıyı çal
-    if (score > 0) {
-        resultText = "Sen bir Güneş gibisin! ☀️ Enerjik, sıcak ve neşelisin!";
-        sunAudio.play();  // Güneş şarkısını çal
-    } else if (score < 0) {
-        resultText = "Sen bir Ay gibisin! 🌙 Gizemli, huzurlu ve derin düşüncelisin!";
-        moonAudio.play();  // Ay şarkısını çal
-    } else {
-        resultText = "Sen hem Güneş, hem de Aysın! ☀️🌙 Dengeli ve uyumlusun!";
-        balanceAudio.play(); // Güneş ve Ay şarkısını çal
-    }
+   if (score > 0) {
+       resultText = "Sen bir Güneş gibisin! ☀️ Enerjik, sıcak ve neşelisin!";
+       sunAudio.play();  // Güneş şarkısını çal
+   } else if (score < 0) {
+       resultText = "Sen bir Ay gibisin! 🌙 Gizemli, huzurlu ve derin düşüncelisin!";
+       moonAudio.play();  // Ay şarkısını çal
+   } else {
+       resultText = "Sen hem Güneş, hem de Aysın! ☀️🌙 Dengeli ve uyumlusun!";
+       balanceAudio.play(); // Güneş ve Ay şarkısını çal
+   }
 
-    document.getElementById("final-result").textContent = resultText;
+   // Sonuç yazısını ekrana yazdır
+   document.getElementById("final-result").innerText = resultText;
+
+   // Sonuç yazısını 3 saniye sonra kaybetmek
+   setTimeout(function() {
+       // Yeni yazıyı ekrana yazdır
+       if (score > 0) {
+           document.getElementById("final-result").innerText = "Seninle her gün, gülüşün gibi parlıyor, Sevgililer Günümüz kutlu olsun canım sevgilim.";
+       } else if (score < 0) {
+           document.getElementById("final-result").innerText = "Seninle her gece, tenindeki ışık gibi huzurla doluyor, Sevgililer Günümüz kutlu olsun canım sevgilim.";
+       } else {
+           document.getElementById("final-result").innerText = "Seninle her an, hem gülüşünle aydınlanıyor hem de teninle huzur buluyor, Sevgililer Günümüz kutlu olsun canım sevgilim.";
+       }
+   }, 8000);
+
+   // Sonuç ekranını görünür hale getir
+   document.getElementById("result-screen").classList.remove("hidden");
+
 }
 
 function restartGame() {
