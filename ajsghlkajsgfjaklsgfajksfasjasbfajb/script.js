@@ -144,11 +144,11 @@ function showResult() {
    setTimeout(function() {
        // Yeni yazıyı ekrana yazdır
        if (score > 0) {
-           document.getElementById("final-result").innerText = "Seninle her gün, gülüşün gibi parlıyor, Sevgililer Günümüz kutlu olsun canım sevgilim.";
+           document.getElementById("final-result").innerText = "Gülüşünün sıcaklığı içimi ısıtıyor, dilerim ki her günüm seninle doğsun, Sevgililer günümüz kutlu olsun canım sevgilim.";
        } else if (score < 0) {
-           document.getElementById("final-result").innerText = "Seninle her gece, tenindeki ışık gibi huzurla doluyor, Sevgililer Günümüz kutlu olsun canım sevgilim.";
+           document.getElementById("final-result").innerText = "Teninin ışığı gözlerimi kamaştırıyor, dilerim ki her gecem seninle son bulsun, Sevgililer günümüz kutlu olsun canım sevgilim.";
        } else {
-           document.getElementById("final-result").innerText = "Seninle her an, hem gülüşünle aydınlanıyor hem de teninle huzur buluyor, Sevgililer Günümüz kutlu olsun canım sevgilim.";
+           document.getElementById("final-result").innerText = "Seninle her an gülüşün kadar sıcak ve tenin kadar parlak, dilerim ki her anımız birlikte olsun, Sevgililer günümüz kutlu olsun canım sevgilim.";
        }
    }, 8000);
 
